@@ -38,8 +38,8 @@
 		</schemas>
 	</update>
 	<updateservers>
-		<server type="extension" name="DWD Wettermodul">
-			https://raw.githubusercontent.com/Bakual/wetter/master/manifest.xml
+		<server type="extension" priority="1" name="Bakual.net">
+			https://www.bakual.net/update/mod_dwd_wettermodul.xml
 		</server>
 	</updateservers>
 	<config>
