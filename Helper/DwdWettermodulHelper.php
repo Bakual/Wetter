@@ -92,7 +92,6 @@ class DwdWettermodulHelper implements DatabaseAwareInterface
 			$timeSteps   = $xmlDocument->ExtendedData->children('dwd', true)->ProductDefinition->ForecastTimeSteps->children('dwd', true);
 			$timeSteps   = array_flip((array) $timeSteps->TimeStep);
 
-			// $location = (string) $xmlDocument->Placemark->description;
 			$dwd = $xmlDocument->Placemark->ExtendedData->children('dwd', true);
 		}
 		catch (\RuntimeException $exception)
@@ -113,15 +112,34 @@ class DwdWettermodulHelper implements DatabaseAwareInterface
 
 		$forecast->timeSteps = $timeSteps;
 
+		// Update current Station from kml file
+		if ($params->get('verify_coordinates'))
+		{
+			$station     = $this->getStation($station);
+			$location    = (string) $xmlDocument->Placemark->description;
+			$coordinates = explode(',', (string) $xmlDocument->Placemark->Point->coordinates);
+
+			if (($coordinates[0] != $station->long) || ($coordinates[1] != $station->lat) || ($coordinates[2] != $station->alt) || ($location != $station->title))
+			{
+				$station->long  = $coordinates[0];
+				$station->lat   = $coordinates[1];
+				$station->alt   = $coordinates[2];
+				$station->title = $location;
+
+				$this->getDatabase()->updateObject('#__dwd_wetter_sites', $station, 'id');
+
+			}
+		}
+
 		return $forecast;
 	}
 
 	/**
 	 * Returns the weather icon for a condition
 	 *
-	 * @param object $list
-	 * @param int    $index
-	 * @param int    $hour
+	 * @param   object  $list
+	 * @param   int     $index
+	 * @param   int     $hour
 	 *
 	 * @return string
 	 *
