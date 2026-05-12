@@ -32,13 +32,13 @@
 		<description>Joomla! Wettermodul</description>
 		<element>mod_dwd_wettermodul</element>
 		<type>module</type>
-		<version>7.0.1</version>
+		<version>7.1.0</version>
 		<client>site</client>
-		<infourl title="DWD Wettermodul">https://github.com/Bakual/wetter/releases/tag/7.0.1</infourl>
+		<infourl title="DWD Wettermodul">https://github.com/Bakual/wetter/releases/tag/7.1.0</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/Bakual/wetter/archive/refs/tags/7.0.1.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/Bakual/wetter/archive/refs/tags/7.1.0.zip</downloadurl>
 		</downloads>
 		<targetplatform name="joomla" version="6.[012345]"/>
-		<sha256>d88a74465ff04d2579cf946b387ce989695ea7aeefcc9021c9d2c0abeadaa078</sha256>
+		<sha256>df19f48b1541753084ff8a8fcc2922216c694fe967db5a71f4cba29827818cd9</sha256>
 	</update>
 </updates>
